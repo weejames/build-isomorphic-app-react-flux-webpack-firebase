@@ -1,0 +1,16 @@
+{
+  "name": "build-isomorphic-app-react-flux-webpack-firebase",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "webpack": "webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-core": "^6.7.6",
+    "babel-loader": "^6.2.4",
+    "webpack": "^1.12.15"
+  }
+}
