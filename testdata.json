@@ -1,0 +1,16 @@
+{
+    "messages": {
+        "0": {
+            "message": "Hello.  Is it me you're looking for?",
+            "date": "Sat, 15 Apr 2016, 23:26:00 BST",
+            "author": "James Constable",
+            "profilePic": "https://avatars2.githubusercontent.com/u/210489"
+        },
+        "1": {
+            "message": "No.  Not at all.",
+            "date": "Sat, 15 Apr 2016, 23:28:00 BST",
+            "author": "James Constable",
+            "profilePic": "https://avatars2.githubusercontent.com/u/210489"
+        }
+    }
+}
