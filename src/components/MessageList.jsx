@@ -2,9 +2,11 @@ import React from 'react';
 import Message from '../components/Message.jsx';
 import Card from 'material-ui/Card';
 import List from 'material-ui/List';
-import Firebase from 'firebase';
 import _ from 'lodash';
+import connectToStores from 'alt-utils/lib/connectToStores';
+import ChatStore from '../stores/ChatStore';
 
+@connectToStores
 class MessageList extends React.Component {
 
     constructor (props) {
@@ -12,39 +14,27 @@ class MessageList extends React.Component {
         this.state = {
             messages: {}
         };
+        ChatStore.getMessages();
+    }
 
-        this.firebaseRef = new Firebase('https://react-chat-tutorial.firebaseio.com/messages');
-        
-        this.firebaseRef.on('child_added', (msg) => {
-            if (this.state.messages[msg.key()]) {
-                return;
-            }
+    static getStores () {
+        return [ChatStore];
+    }
 
-            let msgVal = msg.val();
-            msgVal.key = msg.key();
-
-            this.state.messages[msg.key()] = msgVal;
-            this.setState({
-                messages: this.state.messages
-            });
-        });
-
-        this.firebaseRef.on('child_removed', (msg) => {
-            let msgKey = msg.key();
-            delete this.state.messages[msgKey];
-
-            this.setState({
-                messages: this.state.messages
-            });
-        });
+    static getPropsFromStores () {
+        return ChatStore.getState();
     }
 
     render () {
-        var messageNodes = _.values(this.state.messages).map( (message) => {
-            return (
-                <Message message={message.message} />
-            )
-        });
+        let messageNodes = null;
+
+        if (this.props.messages) {
+            messageNodes = _.values(this.props.messages).map( (message) => {
+                return (
+                    <Message message={message.message} />
+                )
+            });
+        }
 
         return (
             <Card style={{

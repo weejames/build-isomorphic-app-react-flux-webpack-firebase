@@ -6,6 +6,9 @@ import AppBar from 'material-ui/AppBar'
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {deepOrange500} from 'material-ui/styles/colors';
+import connectToStores from 'alt-utils/lib/connectToStores';
+import ChatStore from '../stores/ChatStore';
+import Login from '../components/Login.jsx';
 
 const muiTheme = getMuiTheme({
     palette: {
@@ -13,17 +16,29 @@ const muiTheme = getMuiTheme({
     },
 });
 
+@connectToStores
 class App extends React.Component {
 
     constructor (props, context) {
         super(props, context);
     }
 
+    static getStores () {
+        return [ChatStore];
+    }
+
+    static getPropsFromStores () {
+        return ChatStore.getState();
+    }
+
     render () {
-        return (
-            <MuiThemeProvider muiTheme={muiTheme}>
+        var view = (
+            <Login />
+        );
+
+        if (this.props.user) {
+            view = (
                 <div>
-                    <AppBar title="Chatter Master!" />
                     <div style={{
                             display: 'flex',
                             flexFlow: 'row wrap',
@@ -35,6 +50,15 @@ class App extends React.Component {
                         <MessageList />
                     </div>
                     <MessageBox />
+                </div>
+            );
+        }
+
+        return (
+            <MuiThemeProvider muiTheme={muiTheme}>
+                <div>
+                    <AppBar title="Chatter Master!" />
+                    {view}
                 </div>
             </MuiThemeProvider>
         );

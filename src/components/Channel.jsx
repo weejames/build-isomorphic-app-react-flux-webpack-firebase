@@ -9,9 +9,17 @@ class Channel extends React.Component {
     }
 
     render () {
+        let style = {};
+
+        if (this.props.channel.selected) {
+            style.backgroundColor = '#2196F3';
+        }
+
+
         return (
             <ListItem
-                primaryText={this.props.title} />
+                style={style}
+                primaryText={this.props.channel.name} />
         );
     }
 
