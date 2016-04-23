@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from 'material-ui/Card';
 import trim from 'trim';
-import Firebase from 'firebase';
+import Actions from '../actions';
 
 class MessageBox extends React.Component {
 
@@ -10,13 +10,11 @@ class MessageBox extends React.Component {
         this.state = {
             message: ''
         };
-
-        this.firebaseRef = new Firebase('https://react-chat-tutorial.firebaseio.com/messages');
     }
 
     onChange (event) {
         this.setState({
-            message: trim(event.target.value)
+            message: event.target.value
         });
     }
 
@@ -24,9 +22,7 @@ class MessageBox extends React.Component {
         if (event.keyCode == 13 && trim(event.target.value) !== '') {
             event.preventDefault();
 
-            this.firebaseRef.push({
-                message: this.state.message
-            })
+            Actions.sendMessage(trim(this.state.message));
 
             this.setState({
                 message: ''

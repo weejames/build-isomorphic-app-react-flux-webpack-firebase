@@ -1,8 +1,6 @@
 import React from 'react';
 import Avatar from 'material-ui/Avatar';
 import {ListItem} from 'material-ui/List';
-import CommunicationChatBubble from 'material-ui/svg-icons/communication/chat-bubble';
-
 
 class Message extends React.Component {
 
@@ -13,9 +11,12 @@ class Message extends React.Component {
     render () {
         return (
             <ListItem
-                leftAvatar={<Avatar src="https://avatars2.githubusercontent.com/u/210489?v=3&s=40" />}
-                primaryText={this.props.message}
-                rightIcon={<CommunicationChatBubble />} />
+                leftAvatar={<Avatar src={this.props.message.profilePic} />}
+                primaryText={this.props.message.message}
+                secondaryText={
+                    <p>{this.props.message.author} at {this.props.message.date}</p>
+                }
+                key={this.props.message.key} />
         );
     }
 

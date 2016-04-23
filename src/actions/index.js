@@ -8,7 +8,13 @@ class Actions {
             'channelsReceived',
             'channelsFailed',
             'messagesReceived',
-            'messagesFailed'
+            'messagesFailed',
+            'messagesLoading',
+            'channelOpened',
+            'sendMessage',
+            'messageSendSuccess',
+            'messageSendFailed',
+            'messageReceived'
         );
     }
 

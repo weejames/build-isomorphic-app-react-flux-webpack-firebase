@@ -10,14 +10,64 @@ import _ from 'lodash';
 class ChatStore {
     constructor () {
         this.state = {
-            user: null,
-            messages: null
+            channels: null,
+            messages: null,
+            messagesLoading: true,
+            user: null
         }
+    }
+
+    @bind(Actions.channelOpened)
+    channelOpened (selectedChannel) {
+        _(this.state.channels)
+            .values()
+            .each( (channel) => {
+                channel.selected = false;
+            });
+
+        selectedChannel.selected = true;
+        this.setState({
+            selectedChannel,
+            channels: this.state.channels
+        });
+
+        setTimeout(this.getInstance().getMessages, 10);
+    }
+
+    @bind(Actions.sendMessage)
+    sendMessage (message) {
+        this.state.message = message;
+        setTimeout(this.getInstance().sendMessage, 10);
+    }
+
+    @bind(Actions.messagesLoading)
+    messagesLoading () {
+        this.setState({
+            messagesLoading: true
+        })
+    }
+
+    @bind(Actions.messageReceived)
+    messageReceived (message) {
+        if (this.state.messages[message.key]) {
+            return;
+        }
+
+        this.state.messages[message.key] = message;
+
+        this.setState({
+            messages: this.state.messages
+        });
     }
 
     @bind(Actions.messagesReceived)
     receivedMessages (messages) {
-        if (!messages) return;
+        if (!messages) {
+            this.setState({
+                messagesLoading: false
+            });
+            return;
+        }
 
         _(messages)
             .keys()
@@ -26,7 +76,8 @@ class ChatStore {
             });
 
         this.setState({
-            messages
+            messages,
+            messagesLoading: false
         });
 
         setTimeout(this.getInstance().getMessages, 1000)

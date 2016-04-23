@@ -46,7 +46,7 @@ class ChannelList extends React.Component {
             .map( (key) => {
                 let channel = this.props.channels[key];
                 return (
-                    <Channel channel={channel} />
+                    <Channel channel={channel} key={key} />
                 )
         })
         .value();
