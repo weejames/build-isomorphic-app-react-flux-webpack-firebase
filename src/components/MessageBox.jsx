@@ -33,12 +33,11 @@ class MessageBox extends React.Component {
     render () {
         return (
             <Card style={{
-                    maxWidth: 1200,
-                    margin: '30px auto',
-                    padding: 30
-                }}>
+                maxWidth: 1200,
+                margin: '30px auto',
+                padding: 30
+            }}>
                 <textarea
-                    value={this.state.message}
                     onChange={this.onChange.bind(this)}
                     onKeyUp={this.onKeyUp.bind(this)}
                     style={{
@@ -50,7 +49,9 @@ class MessageBox extends React.Component {
                         color: '#555',
                         fontSize: 14,
                         outline: 'auto 0px'
-                    }} />
+                    }}
+                    value={this.state.message}
+                />
             </Card>
         );
     }

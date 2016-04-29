@@ -12,13 +12,13 @@ class Login extends React.Component {
     render () {
         return (
             <Card style={{
-                    maxWidth: 800,
-                    margin: '30px auto',
-                    padding: 50
-                }}>
+                maxWidth: 800,
+                margin: '30px auto',
+                padding: 50
+            }}>
                 <CardText style={{
-                        textAlign: 'center'
-                    }}>
+                    textAlign: 'center'
+                }}>
                     Get chatting!  Login with your Google Account.
                 </CardText>
                 <RaisedButton

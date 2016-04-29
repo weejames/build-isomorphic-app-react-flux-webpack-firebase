@@ -50,9 +50,9 @@ class MessageList extends React.Component {
 
         return (
             <Card style={{
-                    flexGrow: 2,
-                    marginLeft: 30
-                }}>
+                flexGrow: 2,
+                marginLeft: 30
+            }}>
                 <List>
                     {messageNodes}
                 </List>
