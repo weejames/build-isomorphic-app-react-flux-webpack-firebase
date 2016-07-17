@@ -2,6 +2,7 @@ var Path = require('path'),
     WebPack = require('webpack');
 
 module.exports = {
+    devtool: 'source-map',
     entry: {
         main: [
             'webpack-dev-server/client?http://localhost:8080',
